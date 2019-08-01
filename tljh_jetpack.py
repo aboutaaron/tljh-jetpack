@@ -45,6 +45,7 @@ class CustomFormatter(logging.Formatter):
         formatter = logging.Formatter(log_fmt)
         return formatter.format(record)
 
+
 logger = logging.getLogger("tljh")
 logger.setLevel(logging.DEBUG)
 ch = logging.StreamHandler()
@@ -138,6 +139,7 @@ def enable_shared_directory():
   sh.chmod('777', '/srv/scratch')
   sh.chmod('g+s', '/srv/scratch')
   sh.ln('-s', '/srv/scratch', '/etc/skel/scratch')
+
 
 @hookimpl
 def tljh_config_post_install(config):
