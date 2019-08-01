@@ -4,4 +4,5 @@ setup(
   name='tljh-jetpack',
   entry_points={'tljh': ['jetpack = tljh_jetpack']},
   py_modules=['tljh_jetpack'],
+  install_requires=['sh'],
 )
