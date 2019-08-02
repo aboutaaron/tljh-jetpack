@@ -144,4 +144,4 @@ def _enable_shared_directory():
 @hookimpl
 def tljh_config_post_install(config):
   _enable_shared_directory()
-  _install_additional_jupyterlab_extensions()
+  # _install_additional_jupyterlab_extensions()
