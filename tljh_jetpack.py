@@ -88,7 +88,7 @@ def tljh_extra_apt_packages():
   pass
 
 
-def install_additional_jupyterlab_extensions():
+def _install_additional_jupyterlab_extensions():
     """
     Install the JupyterLab extensions we want.
     """
@@ -110,7 +110,7 @@ def install_additional_jupyterlab_extensions():
     ] + extensions)
 
 
-def enable_R_kernel():
+def _enable_R_kernel():
   """
   TODO: Enable R kernel in jupyter programmatically
   """
@@ -118,7 +118,7 @@ def enable_R_kernel():
   pass
 
 
-def enable_shared_directory():
+def _enable_shared_directory():
   """
   Enable shared directory between users
   See: https://github.com/kafonek/tljh-shared-directory
@@ -143,5 +143,5 @@ def enable_shared_directory():
 
 @hookimpl
 def tljh_config_post_install(config):
-  enable_shared_directory()
-  install_additional_jupyterlab_extensions()
+  _enable_shared_directory()
+  _install_additional_jupyterlab_extensions()
