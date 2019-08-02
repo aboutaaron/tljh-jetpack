@@ -138,7 +138,7 @@ def _enable_shared_directory():
   sh.chown('root:jupyterhub-users', '/srv/scratch')
   sh.chmod('777', '/srv/scratch')
   sh.chmod('g+s', '/srv/scratch')
-  sh.ln('-s', '/srv/scratch', '/etc/skel/scratch')
+  sh.ln('-sf', '/srv/scratch', '/etc/skel/scratch')
 
 
 @hookimpl
