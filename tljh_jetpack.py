@@ -46,7 +46,7 @@ class CustomFormatter(logging.Formatter):
         return formatter.format(record)
 
 
-logger = logging.getLogger("tljh")
+logger = logging.getLogger("tljh-jetpack")
 logger.setLevel(logging.DEBUG)
 ch = logging.StreamHandler()
 ch.setFormatter(CustomFormatter())
