@@ -96,7 +96,7 @@ def _give_group_access(path, group='jupyterhub-admins', mode=777):
   # Cribbed from https://github.com/kafonek/tljh-shared-directory/blob/master/tljh_shared_directory.py
   logger.info('Changing extensions ownership...')
   ensure_group(group)
-  sh.chown(f'root:{group}', path)
+  sh.chown(f'root:{group}', '-R', path)
   sh.chmod(mode, path)
   sh.chmod('g+s', path)  # https://unix.stackexchange.com/a/182225/105076
 
