@@ -78,6 +78,8 @@ def tljh_extra_user_pip_packages():
 @hookimpl
 def tljh_extra_apt_packages():
   """
+  CURRENTLY NOT IN USE
+
   Add postgres support
   """
   # logger.info('[JETPACK] Installing postgresql bindings for ubuntu...')
@@ -107,6 +109,8 @@ def _install_additional_jupyterlab_extensions():
 
 def _enable_shared_directory():
   """
+  CURRENTLY NOT IN USE
+
   Enable shared directory between users
   See: https://github.com/kafonek/tljh-shared-directory
 
