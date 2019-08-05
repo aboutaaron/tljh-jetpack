@@ -125,7 +125,7 @@ def _install_additional_jupyterlab_extensions():
     # so to prevent confusion we'll disable it starting out
     utils.run_subprocess([
       os.path.join(USER_ENV_PREFIX, 'bin/jupyter'),
-      'labextenstion',
+      'labextension',
       'disable',
       'dask-labextension'
     ])
