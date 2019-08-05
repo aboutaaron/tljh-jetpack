@@ -89,11 +89,27 @@ def tljh_extra_apt_packages():
   pass
 
 
+def _give_group_access(path, group='jupyterhub-admins', mode=777):
+  """
+  Give group access to path. Defaults to `jupyterhub-admins` and 777
+  """
+  # Cribbed from https://github.com/kafonek/tljh-shared-directory/blob/master/tljh_shared_directory.py
+  logger.info('Changing extensions ownership...')
+  ensure_group(group)
+  sh.chown(f'root:{group}', path)
+  sh.chmod(mode, path)
+  sh.chmod('g+s', path)  # https://unix.stackexchange.com/a/182225/105076
+
+
 def _install_additional_jupyterlab_extensions():
     """
     Install the JupyterLab extensions we want.
     """
     logger.info('[JETPACK] Installing additional jupyterlab extensions...')
+    # in order to add/remove extensions we'll want to make sure all admin users
+    # have permissions to the directory stored in /opt/tljh/user/share/jupyter/lab/extensions
+    _give_group_access(os.path.join(USER_ENV_PREFIX, 'share', 'jupyter'))
+
     extensions = [
         '@jupyterlab/git',
         'dask-labextension',
@@ -113,7 +129,6 @@ def _install_additional_jupyterlab_extensions():
       'disable',
       'dask-labextension'
     ])
-
 
 @hookimpl
 def tljh_config_post_install(config):
