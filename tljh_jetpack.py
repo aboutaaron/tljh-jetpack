@@ -113,6 +113,16 @@ def tljh_config_post_install(config):
 
 
 @hookimpl
+def tljh_custom_jupyterhub_config(c):
+  """
+  Make sure Jupyterlab has JupyterHub management console
+  """
+  logger.info('[JETPACK] Add JupyterHub to Jupyterlab environment')
+  c.Spawner.cmd = ['jupyter-labhub']
+  print(c)
+
+
+@hookimpl
 def tljh_post_install():
   """
   What to run post install
