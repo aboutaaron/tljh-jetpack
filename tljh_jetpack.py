@@ -59,8 +59,7 @@ def tljh_extra_user_conda_packages():
   return [
     'r-base',
     'r-essentials',
-    'r-irkernel',
-    'voila',
+    'r-irkernel'
   ]
 
 
@@ -94,13 +93,9 @@ def _install_additional_jupyterlab_extensions():
     """
     logger.info('[JETPACK] Installing additional jupyterlab extensions...')
     extensions = [
-        '@jupyterlab/hub-extension',
         '@jupyterlab/git',
-        '@jupyterlab/google-drive',
-        '@jupyterlab/shortcutui',
         'dask-labextension',
-        '@jupyter-voila/jupyterlab-preview',
-        '@jupyterlab/commenting-extension'
+        '@jupyterlab/hub-extension',
         '@jupyter-widgets/jupyterlab-manager'
     ]
     utils.run_subprocess([
