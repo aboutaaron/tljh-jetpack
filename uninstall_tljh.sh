@@ -27,11 +27,18 @@ if [[ $response =~ ^(yes|y| ) ]] || [[ -z $response ]]; then
   sudo rm -rf /opt/tljh/
   sudo rm /usr/bin/tljh-config
 
-  echo "For the final step, manually remove any user created by TLJH on your system. Here's a list of possible users:"
+  echo "reseting and reloading services..."
+  sudo systemctl daemon-reload
+  sudo systemctl reset-failed
+
+  echo "For the final step, manually remove any services and users created by TLJH on your system. Here's a list of possible users:"
   cat /etc/passwd | grep jupyter
   echo
   echo "If you want to remove the users try userdel:"
   echo "  sudo userdel -r jupyter-USERNAME"
+  echo "You'll also want to remove any associated services:"
+  echo "  sudo systemctl disable jupyter-USERNAME"
+  echo "  sudo systemctl stop jupyter-USERNAME"
   exit 0
 else
   echo "Leaving TLJH setup as is...exiting"
