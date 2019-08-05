@@ -19,5 +19,7 @@ Need a restart? tljh-jetpack includes a bash script that tries to remove everyth
 **Warning**: THIS WILL TOTALLY REMOVE TLJH FROM YOUR SERVER. ONLY DO THIS IS YOU WANT TO RESET THE WORLD. YOU'VE BEEN WARNED!
 
 ```bash
-curl https://raw.githubusercontent.com/aboutaaron/tljh-jetpack/master/uninstall_tljh.sh | bash
+curl https://raw.githubusercontent.com/aboutaaron/tljh-jetpack/master/uninstall_tljh.sh \
+  -o uninstall_tljh.sh && \
+  bash uninstall_tljh.sh
 ```
