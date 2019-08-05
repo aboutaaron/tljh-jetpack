@@ -36,7 +36,8 @@ if [[ $response =~ ^(yes|y| ) ]] || [[ -z $response ]]; then
   echo
   echo "If you want to remove the users try userdel:"
   echo "  sudo userdel -r jupyter-USERNAME"
-  echo "You'll also want to remove any associated services:"
+  echo
+  echo "You'll first need to remove any associated services:"
   echo "  sudo systemctl disable jupyter-USERNAME"
   echo "  sudo systemctl stop jupyter-USERNAME"
   exit 0
