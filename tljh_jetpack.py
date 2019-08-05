@@ -105,10 +105,10 @@ def _install_additional_jupyterlab_extensions():
     """
     Install the JupyterLab extensions we want.
     """
-    logger.info('Installing additional jupyterlab extensions...')
     # in order to add/remove extensions we'll want to make sure all admin users
     # have permissions to the directory stored in /opt/tljh/user/share/jupyter/lab/extensions
-    _give_group_access(os.path.join(USER_ENV_PREFIX, 'share', 'jupyter'))
+    _give_group_access(os.path.join(USER_ENV_PREFIX, 'share', 'jupyter', '*'))
+    logger.info('Installing additional jupyterlab extensions...')
 
     extensions = [
         '@jupyterlab/git',
