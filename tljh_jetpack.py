@@ -96,6 +96,7 @@ def _install_additional_jupyterlab_extensions():
     logger.info('[JETPACK] Installing additional jupyterlab extensions...')
     extensions = [
         '@jupyterlab/git',
+        'dask-labextension',
         '@jupyter-widgets/jupyterlab-manager'
     ]
     utils.run_subprocess([
@@ -103,6 +104,15 @@ def _install_additional_jupyterlab_extensions():
         'labextension',
         'install'
     ] + extensions)
+
+    # the dask extension will throw an error if a cluster is running
+    # so to prevent confusion we'll disable it starting out
+    utils.run_subprocess([
+      os.path.join(USER_ENV_PREFIX, 'bin/jupyter'),
+      'labextenstion',
+      'disable',
+      'dask-labextension'
+    ])
 
 
 @hookimpl
