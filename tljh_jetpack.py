@@ -110,14 +110,6 @@ def _install_additional_jupyterlab_extensions():
     ] + extensions)
 
 
-def _enable_R_kernel():
-  """
-  TODO: Enable R kernel in jupyter programmatically
-  """
-  logger.info('[JETPACK] Enabling R kernel in jupyter...')
-  pass
-
-
 def _enable_shared_directory():
   """
   Enable shared directory between users
@@ -143,5 +135,4 @@ def _enable_shared_directory():
 
 @hookimpl
 def tljh_config_post_install(config):
-  _enable_shared_directory()
-  # _install_additional_jupyterlab_extensions()
+  config['default_app'] = 'jupyterlab'
