@@ -107,31 +107,6 @@ def _install_additional_jupyterlab_extensions():
     ] + extensions)
 
 
-def _enable_shared_directory():
-  """
-  CURRENTLY NOT IN USE
-
-  Enable shared directory between users
-  See: https://github.com/kafonek/tljh-shared-directory
-
-  Configure /srv/scratch and change configs/mods
-  """
-  logger.info('[JETPACK] Adding shared-directory plugin...')
-  ### mkdir -p /srv/scratch
-  ### sudo chown  root:jupyterhub-users /srv/scratch
-  ### sudo chmod 777 /srv/scratch
-  ### sudo chmod g+s /srv/scratch
-  ### sudo ln -s /srv/scratch /etc/skel/scratch
-  sh.mkdir('/srv/scratch', '-p')
-  # jupyterhub-users doesn't get created until a user logs in
-  # make sure it's created before changing permissions on directory
-  ensure_group('jupyterhub-users')
-  sh.chown('root:jupyterhub-users', '/srv/scratch')
-  sh.chmod('777', '/srv/scratch')
-  sh.chmod('g+s', '/srv/scratch')
-  sh.ln('-sf', '/srv/scratch', '/etc/skel/scratch')
-
-
 @hookimpl
 def tljh_config_post_install(config):
   config['default_app'] = 'jupyterlab'  # I don't think this works
