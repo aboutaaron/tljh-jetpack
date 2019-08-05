@@ -134,7 +134,7 @@ def _enable_shared_directory():
 
 @hookimpl
 def tljh_config_post_install(config):
-  config['default_app'] = 'jupyterlab'
+  config['default_app'] = 'jupyterlab'  # I don't think this works
 
 
 @hookimpl
