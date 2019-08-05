@@ -55,7 +55,7 @@ logger.addHandler(ch)
 
 @hookimpl
 def tljh_extra_user_conda_packages():
-  logger.info('[JETPACK] Installing R and essentials via conda-forge...')
+  logger.info('Installing R and essentials via conda-forge...')
   return [
     'r-base',
     'r-essentials',
@@ -65,7 +65,7 @@ def tljh_extra_user_conda_packages():
 
 @hookimpl
 def tljh_extra_user_pip_packages():
-  logger.info('[JETPACK] Installing data science libraries...')
+  logger.info('Installing data science libraries...')
   return [
     'dask[complete]',
     'scikit-learn',
@@ -82,7 +82,7 @@ def tljh_extra_apt_packages():
 
   Add postgres support
   """
-  # logger.info('[JETPACK] Installing postgresql bindings for ubuntu...')
+  # logger.info('Installing postgresql bindings for ubuntu...')
   # return [
   #   'libpg-dev'
   # ]
@@ -105,7 +105,7 @@ def _install_additional_jupyterlab_extensions():
     """
     Install the JupyterLab extensions we want.
     """
-    logger.info('[JETPACK] Installing additional jupyterlab extensions...')
+    logger.info('Installing additional jupyterlab extensions...')
     # in order to add/remove extensions we'll want to make sure all admin users
     # have permissions to the directory stored in /opt/tljh/user/share/jupyter/lab/extensions
     _give_group_access(os.path.join(USER_ENV_PREFIX, 'share', 'jupyter'))
@@ -140,7 +140,7 @@ def tljh_custom_jupyterhub_config(c):
   """
   Make sure Jupyterlab has JupyterHub management console
   """
-  logger.info('[JETPACK] Add JupyterHub to Jupyterlab environment')
+  logger.info('Add JupyterHub to Jupyterlab environment')
   c.Spawner.cmd = ['jupyter-labhub']
 
 
