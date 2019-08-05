@@ -96,8 +96,6 @@ def _install_additional_jupyterlab_extensions():
     logger.info('[JETPACK] Installing additional jupyterlab extensions...')
     extensions = [
         '@jupyterlab/git',
-        'dask-labextension',
-        '@jupyterlab/hub-extension',
         '@jupyter-widgets/jupyterlab-manager'
     ]
     utils.run_subprocess([
@@ -119,7 +117,6 @@ def tljh_custom_jupyterhub_config(c):
   """
   logger.info('[JETPACK] Add JupyterHub to Jupyterlab environment')
   c.Spawner.cmd = ['jupyter-labhub']
-  print(c)
 
 
 @hookimpl
