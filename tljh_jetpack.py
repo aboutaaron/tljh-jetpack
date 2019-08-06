@@ -99,27 +99,24 @@ def _give_group_access(path, group='jupyterhub-admins', is_directory=False):
     ensure_group(group)
     recursive = '-R' if is_directory else ''
 
-    utils.run_subprocess([
-        'chown',
-        f'root:{group}',
-        recursive,
-        path
-    ])
-
-    utils.run_subprocess([
-        'chmod',
-        recursive,
-        path
-    ])
-
-    # sh.chown(f'root:{group}', recursive, path)
-    # sh.chmod('g+w', recursive, path)  # https://superuser.com/a/695186/234265
+    sh.chown(f'root:{group}', recursive, path)
+    sh.chmod('g+w', recursive, path)  # https://superuser.com/a/695186/234265
 
 
 def _install_additional_jupyterlab_extensions():
     """
     Install the JupyterLab extensions we want.
     """
+    # in order to add/remove extensions we'll want to make sure all admin users
+    # have permissions to the directory stored in /opt/tljh/user/share/jupyter/lab/extensions
+    logger.info('Changing extensions ownership...')
+    jupyter_shared_path = os.path.join(
+        USER_ENV_PREFIX, 'share', 'jupyter')
+    _give_group_access(jupyter_shared_path, is_directory=True)
+    # extensions also modify a settings file so we'll need to add access there, too
+    _give_group_access(os.path.join(jupyter_shared_path, 'lab', 'settings', '.'))
+    _give_group_access(os.path.join(jupyter_shared_path, 'lab', 'extensions', '.'))
+
     logger.info('Installing additional jupyterlab extensions...')
 
     extensions = [
@@ -141,14 +138,6 @@ def _install_additional_jupyterlab_extensions():
         'disable',
         'dask-labextension'
     ])
-    # in order to add/remove extensions we'll want to make sure all admin users
-    # have permissions to the directory stored in /opt/tljh/user/share/jupyter/lab/extensions
-    logger.info('Changing extensions ownership...')
-    jupyter_shared_path = os.path.join(
-        USER_ENV_PREFIX, 'share', 'jupyter', '**', '*')
-    _give_group_access(jupyter_shared_path, is_directory=True)
-    # extensions also modify a settings file so we'll need to add access there, too
-    # _give_group_access(os.path.join(jupyter_shared_path, 'lab', 'settings', 'page_confi'))
 
 
 @hookimpl
