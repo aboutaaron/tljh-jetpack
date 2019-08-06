@@ -116,9 +116,12 @@ def _install_additional_jupyterlab_extensions():
     jupyter_shared_path = os.path.join(
         USER_ENV_PREFIX, 'share', 'jupyter')
     _give_group_access(jupyter_shared_path, recursive=True)
+    for directory in ['settings', 'extensions', 'staging']:
+        _give_group_access(os.path.join(jupyter_shared_path, 'lab', directory, '.'), recursive=True)
+
     # extensions also modify a settings file so we'll need to add access there, too
-    _give_group_access(os.path.join(jupyter_shared_path, 'lab', 'settings', '.'), recursive=True)
-    _give_group_access(os.path.join(jupyter_shared_path, 'lab', 'extensions', '.'), recursive=True)
+    _give_group_access(os.path.join(jupyter_shared_path, 'lab', 'settings', 'page_config.json'))
+    _give_group_access(os.path.join(jupyter_shared_path, 'lab', 'staging', 'build', '.'), recursive=True)
 
     logger.info('Installing additional jupyterlab extensions...')
 
