@@ -30,8 +30,9 @@ if [[ $response =~ ^(yes|y| ) ]] || [[ -z $response ]]; then
   echo "reseting and reloading services..."
   sudo systemctl daemon-reload
   sudo systemctl reset-failed
-
+  echo
   echo "For the final step, manually remove any services and users created by TLJH on your system. Here's a list of possible users:"
+  echo
   cat /etc/passwd | grep jupyter
   echo
   echo "First, remove any associated services (replace USERNAME with your admin users):"
