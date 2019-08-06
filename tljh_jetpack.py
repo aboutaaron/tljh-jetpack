@@ -74,7 +74,7 @@ def tljh_extra_user_pip_packages():
         'fastparquet',
         'python-snappy',
         'pyarrow',
-        # 'psycopg2',
+        'psycopg2',
         'beautifulsoup4',
         'jupyterlab==1.0.4'
     ]
@@ -83,15 +83,15 @@ def tljh_extra_user_pip_packages():
 @hookimpl
 def tljh_extra_apt_packages():
     """
-    CURRENTLY NOT IN USE
-
-    Add postgres support
+    Install additional apt packages
     """
-    # logger.info('Installing postgresql bindings for ubuntu...')
-    # return [
-    #   'libpg-dev'
-    # ]
-    pass
+    logger.info('Installing postgresql bindings for ubuntu...')
+    return [
+        'postgresql-10',
+        'postgresql-10-postgis-2.4',
+        'postgresql-10-postgis-scripts',
+        'libpg-dev'
+    ]
 
 
 def _give_group_access(path, group='jupyterhub-admins', recursive=False):
