@@ -108,10 +108,10 @@ def _install_additional_jupyterlab_extensions():
     # in order to add/remove extensions we'll want to make sure all admin users
     # have permissions to the directory stored in /opt/tljh/user/share/jupyter/lab/extensions
     logger.info('Changing extensions ownership...')
-    jupyter_path = os.path.join(USER_ENV_PREFIX, 'share', 'jupyter')
-    _give_group_access(jupyter_path, is_directory=True)
+    jupyter_shared_path = os.path.join(USER_ENV_PREFIX, 'share', 'jupyter', '**', '*')
+    _give_group_access(jupyter_shared_path, is_directory=True)
     # extensions also modify a settings file so we'll need to add access there, too
-    _give_group_access(os.path.join(jupyter_path, 'lab', 'settings', 'page_config.json'))
+    # _give_group_access(os.path.join(jupyter_shared_path, 'lab', 'settings', 'page_confi'))
 
     logger.info('Installing additional jupyterlab extensions...')
 
