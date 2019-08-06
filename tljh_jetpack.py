@@ -91,16 +91,19 @@ def tljh_extra_apt_packages():
     pass
 
 
-def _give_group_access(path, group='jupyterhub-admins', is_directory=False):
+def _give_group_access(path, group='jupyterhub-admins', recursive=False):
     """
     Give group access to path. Defaults to `jupyterhub-admins` and 777
     """
     # Cribbed from https://github.com/kafonek/tljh-shared-directory/blob/master/tljh_shared_directory.py
     ensure_group(group)
-    recursive = '-R' if is_directory else ''
 
-    sh.chown(f'root:{group}', recursive, path)
-    sh.chmod('g+w', recursive, path)  # https://superuser.com/a/695186/234265
+    if recursive:
+        sh.chown(f'root:{group}', '-R', path)
+        sh.chmod('g+w', '-R', path) # https://superuser.com/a/695186/234265
+    else:
+        sh.chown(f'root:{group}', path)
+        sh.chmod('g+w', path)
 
 
 def _install_additional_jupyterlab_extensions():
@@ -112,10 +115,10 @@ def _install_additional_jupyterlab_extensions():
     logger.info('Changing extensions ownership...')
     jupyter_shared_path = os.path.join(
         USER_ENV_PREFIX, 'share', 'jupyter')
-    _give_group_access(jupyter_shared_path, is_directory=True)
+    _give_group_access(jupyter_shared_path, recursive=True)
     # extensions also modify a settings file so we'll need to add access there, too
-    _give_group_access(os.path.join(jupyter_shared_path, 'lab', 'settings', '.'))
-    _give_group_access(os.path.join(jupyter_shared_path, 'lab', 'extensions', '.'))
+    _give_group_access(os.path.join(jupyter_shared_path, 'lab', 'settings', '.'), recursive=True)
+    _give_group_access(os.path.join(jupyter_shared_path, 'lab', 'extensions', '.'), recursive=True)
 
     logger.info('Installing additional jupyterlab extensions...')
 
