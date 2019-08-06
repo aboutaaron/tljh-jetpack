@@ -71,6 +71,9 @@ def tljh_extra_user_pip_packages():
     return [
         'dask[complete]',
         'scikit-learn',
+        'fastparquet',
+        'python-snappy',
+        'pyarrow',
         # 'psycopg2',
         'beautifulsoup4',
         'jupyterlab==1.0.4'
