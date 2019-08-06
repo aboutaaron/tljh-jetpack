@@ -34,6 +34,7 @@ if [[ $response =~ ^(yes|y| ) ]] || [[ -z $response ]]; then
   echo "For the final step, manually remove any services and users created by TLJH on your system. Here's a list of possible users:"
   cat /etc/passwd | grep jupyter
   echo
+  echo
   echo "If you want to remove the users try userdel:"
   echo "  sudo userdel -r jupyter-USERNAME"
   echo
