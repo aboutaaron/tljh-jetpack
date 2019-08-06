@@ -30,7 +30,7 @@ class CustomFormatter(logging.Formatter):
     red = "\x1b[31;21m"
     bold_red = "\x1b[31;1m"
     reset = "\x1b[0m"
-    format = "%(asctime)s - %(name)s - %(levelname)s - %(message)s (%(filename)s:%(lineno)d)"
+    format = "[%(name)s] %(message)s (%(filename)s:%(lineno)d)"
 
     FORMATS = {
         logging.DEBUG: grey + format + reset,
@@ -107,7 +107,7 @@ def _install_additional_jupyterlab_extensions():
     """
     # in order to add/remove extensions we'll want to make sure all admin users
     # have permissions to the directory stored in /opt/tljh/user/share/jupyter/lab/extensions
-    _give_group_access(os.path.join(USER_ENV_PREFIX, 'share', 'jupyter', '*'))
+    _give_group_access(os.path.join(USER_ENV_PREFIX, 'share', 'jupyter'))
     logger.info('Installing additional jupyterlab extensions...')
 
     extensions = [
