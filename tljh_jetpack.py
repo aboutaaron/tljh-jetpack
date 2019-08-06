@@ -90,7 +90,6 @@ def tljh_extra_apt_packages():
         'postgresql-10',
         'postgresql-10-postgis-2.4',
         'postgresql-10-postgis-scripts',
-        'libpg-dev'
     ]
 
 
