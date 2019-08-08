@@ -141,12 +141,16 @@ def _install_additional_jupyterlab_extensions():
         'dask-labextension'
     ])
 
-    for directory in ['settings', 'extensions', 'staging']:
+    for directory in ['settings', 'extensions', 'staging', 'schemas']:
         _give_group_access(os.path.join(jupyter_shared_path, 'lab', directory, '.'), recursive=True)
 
     # extensions also modify a settings file so we'll need to add access there, too
+    _give_group_access(os.path.join(jupyter_shared_path, 'lab', '.'), recursive=True)
     _give_group_access(os.path.join(jupyter_shared_path, 'lab', 'settings', 'page_config.json'))
     _give_group_access(os.path.join(jupyter_shared_path, 'lab', 'staging', 'build', '.'), recursive=True)
+    _give_group_access(os.path.join(jupyter_shared_path, 'lab', 'schemas', '@jupyterlab', '.'), recursive=True)
+    _give_group_access(os.path.join(jupyter_shared_path, 'lab', 'schemas', 'dask-labextension', '.'), recursive=True)
+    _give_group_access(os.path.join(jupyter_shared_path, 'lab', 'schemas', '@jupyter-widgets', '.'), recursive=True)
 
 
 @hookimpl
